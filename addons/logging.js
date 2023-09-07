@@ -2,7 +2,7 @@ const readline = require('node:readline');
 const { stdin: input, stdout: output } = require('node:process')
 const getTimestamp = () => `[${(new Date()).toLocaleTimeString()}]`
 
-module.exports = function inject(bot, options) {
+export default function inject(bot, options) {
     const chalk = require('chalk')
     bot.on('message', (msg, pos) => {
 		if (bot.noLog && !msg.toString().toLowerCase().includes('parrot')) return

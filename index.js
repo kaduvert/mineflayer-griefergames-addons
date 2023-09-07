@@ -1,5 +1,5 @@
-import antiAfk from './addons/antiAfk'
-import logging from './addons/logging'
-import mysteryModSpoof from './addons/mysteryModSpoof'
+import antiAfk from './addons/antiAfk.js'
+import logging from './addons/logging.js'
+import mysteryModSpoof from './addons/mysteryModSpoof.js'
 
-export { antiAfk, logging, mysteryModSpoof }
+export default { antiAfk, logging, mysteryModSpoof }
