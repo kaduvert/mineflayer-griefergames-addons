@@ -1,5 +1,3 @@
-const readline = require('node:readline');
-const { stdin: input, stdout: output } = require('node:process')
 const getTimestamp = () => `[${(new Date()).toLocaleTimeString()}]`
 
 module.exports = function inject(bot, options) {
