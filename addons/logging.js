@@ -1,19 +1,30 @@
-const getTimestamp = () => `[${(new Date()).toLocaleTimeString()}]`
+const chalk = require('chalk')
 
 module.exports = function inject(bot, options) {
-    const chalk = require('chalk')
+    bot.gg.chat.unread = []
+
+    bot.gg.chat.getUnread = () => {
+        const unreadMessages = bot.gg.chat.unread
+
+        bot.gg.chat.unread = []
+
+        return unreadMessages
+    }
+
+    bot.gg.chat.printUnread = () => bot.gg.chat.getUnread().map(({ ts, msg }) => (chalk.cyan(`[${ts.toLocaleTimeString('de')}] `) + msg).forEach(msg => console.log(msg))
+
     bot.on('message', (msg, pos) => {
-		if (bot.noLog && !msg.toString().toLowerCase().includes('parrot')) return
-		const str = msg.toString()
-		if (pos === 'game_info' || str === '»' || str === '') return
-		console.log(chalk.cyan(getTimestamp()), msg.toAnsi())
-	})
+        if (!bot.noLog && pos === 'game_info') {
+            const str = msg.toString()
+		          if (str === '»' || str === '') return
 
-	bot.on('kicked', (reason) => {
-		reason = JSON.parse(reason).text
-		console.log(chalk.red(getTimestamp()), chalk.yellowBright(`Kicked: ${chalk.red(reason)}`))
-	})
+            bot.gg.chat.unread.push({ ts: (new Date()), msg: msg.toAnsi() })
+        }
+    })
 
-	const rl = readline.createInterface({ input, output })
-	rl.on('line', bot.chat.send)
+    bot.on('kicked', (reason) => {
+        reason = JSON.parse(reason).text
+
+        console.log(chalk.red(getTimestamp()), chalk.yellowBright(`Kicked: ${chalk.red(reason)}`))
+    })
 }
