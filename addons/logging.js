@@ -11,7 +11,7 @@ module.exports = function inject(bot, options) {
         return unreadMessages
     }
 
-    bot.gg.chat.printUnread = () => bot.gg.chat.getUnread().map(({ ts, msg }) => (chalk.cyan(`[${ts.toLocaleTimeString('de')}] `) + msg)).forEach(msg => console.log(msg))
+    bot.gg.chat.getUnreadFormatted = () => bot.gg.chat.getUnread().map(({ ts, msg }) => (chalk.cyan(`[${ts.toLocaleTimeString('de')}] `) + msg)).join('\n')
 
     bot.on('message', (msg, pos) => {
         if (!bot.noLog && (pos !== 'game_info')) {
