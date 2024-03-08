@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/kaduvert/mineflayer-griefergames-addons/issues"
   },
-  "homepage": "https://github.com/kaduvert/mineflayer-griefergames-addons#readme"
+  "homepage": "https://github.com/kaduvert/mineflayer-griefergames-addons#readme",
+  "dependencies": {
+    "chalk": "^5.3.0"
+  }
 }

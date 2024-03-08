@@ -16,7 +16,7 @@ module.exports = function inject(bot, options) {
     bot.on('message', (msg, pos) => {
         if (!bot.noLog && (pos !== 'game_info')) {
             const str = msg.toString()
-		          if (str === '»' || str === '') return
+		    if (str === '»' || str === '') return
 
             bot.gg.chat.unread.push({ ts: (new Date()), msg: msg.toAnsi() })
         }
