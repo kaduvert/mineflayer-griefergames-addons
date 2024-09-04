@@ -25,6 +25,6 @@ module.exports = function inject(bot, options) {
     bot.on('kicked', (reason) => {
         reason = JSON.parse(reason).text
 
-        console.log(chalk.red(getTimestamp()), chalk.yellowBright(`Kicked: ${chalk.red(reason)}`))
+        console.log(chalk.red(`[${(new Date()).toLocaleTimeString('de')}] `), chalk.yellowBright(`Kicked: ${chalk.red(reason)}`))
     })
 }
