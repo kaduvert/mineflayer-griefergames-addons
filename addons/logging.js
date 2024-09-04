@@ -1,6 +1,8 @@
 const chalk = require('chalk')
 
 module.exports = function inject(bot, options) {
+    const ChatMessage = require('prismarine-chat')(bot.registry)
+
     bot.gg.chat.unread = []
 
     bot.gg.chat.getUnread = () => {
@@ -22,9 +24,11 @@ module.exports = function inject(bot, options) {
         }
     })
 
-    bot.on('kicked', (reason) => {
-        reason = JSON.parse(reason).text
-
-        console.log(chalk.red(`[${(new Date()).toLocaleTimeString('de')}] `), chalk.yellowBright(`Kicked: ${chalk.red(reason)}`))
-    })
+    bot.on('kicked', (reason) => (
+        console.log(
+            chalk.red(`[${(new Date()).toLocaleTimeString('de')}]`),
+            chalk.yellowBright('Kicked:'),
+            (new ChatMessage(JSON.parse(reason))).toAnsi()
+        )
+    ))
 }
